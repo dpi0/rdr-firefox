@@ -6,7 +6,7 @@
   <img alt="GitHub Actions Workflow Status" src="https://img.shields.io/github/actions/workflow/status/dpi0/rdr-firefox/ci.yml?branch=main">
   <img alt="GitHub Forks" src="https://img.shields.io/github/forks/dpi0/rdr-firefox?style=flat">
   <img alt="GitHub Contributors" src="https://img.shields.io/github/contributors/dpi0/rdr-firefox?style=flat&color=pink">
-  <img alt="GitHub License" src="https://img.shields.io/github/license/dpi0/rdr-firefox">
+  <img alt="GitHub License" src="https://img.shields.io/github/license/dpi0/rdr-firefox?style=flat">
 </p>
 
 <h4>Re-director for Firefox</h4>

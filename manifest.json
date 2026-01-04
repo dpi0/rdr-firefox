@@ -1,0 +1,38 @@
+{
+  "manifest_version": 2,
+  "name": "rdr",
+  "version": "1.0.0",
+  "description": "Simple rule based re-director",
+  "permissions": [
+    "webRequest",
+    "webRequestBlocking",
+    "<all_urls>",
+    "storage",
+    "tabs"
+  ],
+  "background": {
+    "scripts": ["background.js"],
+    "persistent": true
+  },
+  "options_ui": {
+    "page": "options.html",
+    "open_in_tab": true
+  },
+  "browser_action": {
+    "default_title": "rdr"
+  },
+  "commands": {
+    "go-original": {
+      "suggested_key": {
+        "default": "Alt+Shift+O"
+      },
+      "description": "Go to original URL"
+    },
+    "go-redirected": {
+      "suggested_key": {
+        "default": "Alt+Shift+R"
+      },
+      "description": "Go to redirected URL"
+    }
+  }
+}
