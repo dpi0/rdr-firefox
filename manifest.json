@@ -14,6 +14,12 @@
     "scripts": ["background.js"],
     "persistent": true
   },
+  "icons": {
+    "16": "icons/rdr-16-16.png",
+    "32": "icons/rdr-32-32.png",
+    "48": "icons/rdr-48-48.png",
+    "128": "icons/rdr-128-128.png"
+  },
   "options_ui": {
     "page": "options.html",
     "open_in_tab": true
