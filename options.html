@@ -91,6 +91,19 @@
         color: var(--fg);
         line-height: 1.4;
       }
+
+      .error-text {
+        color: #d00000;
+      }
+
+      .saved-text {
+        color: #1fa21f;
+      }
+
+      button:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+      }
     </style>
   </head>
 
@@ -98,7 +111,7 @@
     <header>
       <div class="title">⚡ rdr</div>
       <div class="info" id="info">0 rules · Ctrl+S to save</div>
-      <button id="save" title="Save (Ctrl+S)">Save</button>
+      <button id="save">save</button>
     </header>
 
     <textarea id="rules" spellcheck="false"></textarea>
