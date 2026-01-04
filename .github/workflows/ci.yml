@@ -14,14 +14,14 @@ jobs:
         uses: kewisch/action-web-ext@v1
         with:
           cmd: lint
-          source: addon
+          source: .
           channel: listed
       - name: Build addon
         id: web-ext-build
         uses: kewisch/action-web-ext@v1
         with:
           cmd: build
-          source: addon
+          source: .
           filename: "{name}-{version}.xpi"
           ignoreFiles: '["web-ext-artifacts","node_modules","*.md"]'
       - name: Upload artifact
