@@ -17,6 +17,8 @@
 
 </p>
 
+</div>
+
 Heavily inspired by [einaregilsson/Redirector](https://github.com/einaregilsson/Redirector).
 
 > [!WARNING]
