@@ -3,6 +3,11 @@ let compiledRules = [];
 const tabMap = new Map();
 const bypassUntil = new Map();
 
+browser.tabs.onRemoved.addListener((tabId) => {
+  tabMap.delete(tabId);
+  bypassUntil.delete(tabId);
+});
+
 async function loadRules() {
   const data = await browser.storage.local.get("rules");
   rules = Array.isArray(data.rules) ? data.rules : [];
@@ -54,12 +59,37 @@ browser.commands.onCommand.addListener(async (command) => {
   const state = tabMap.get(tab.id);
   if (!state) return;
 
+  const origStr = state.original;
+  const redStr = state.redirected;
+
+  let i = 0;
+  while (
+    i < origStr.length &&
+    i < redStr.length &&
+    origStr[origStr.length - 1 - i] === redStr[redStr.length - 1 - i]
+  ) {
+    i++;
+  }
+
+  const originalBase = origStr.slice(0, origStr.length - i);
+  const redirectedBase = redStr.slice(0, redStr.length - i);
+
   if (command === "go-original") {
-    bypassUntil.set(tab.id, Date.now() + 3000);
-    browser.tabs.update(tab.id, { url: state.original });
+    if (tab.url.startsWith(redirectedBase)) {
+      const newPath = tab.url.slice(redirectedBase.length);
+      const targetUrl = originalBase + newPath;
+      bypassUntil.set(tab.id, Date.now() + 3000);
+      browser.tabs.update(tab.id, { url: targetUrl });
+    } else {
+    }
   }
 
   if (command === "go-redirected") {
-    browser.tabs.update(tab.id, { url: state.redirected });
+    if (tab.url.startsWith(originalBase)) {
+      const newPath = tab.url.slice(originalBase.length);
+      const targetUrl = redirectedBase + newPath;
+
+      browser.tabs.update(tab.id, { url: targetUrl });
+    }
   }
 });
