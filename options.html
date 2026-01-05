@@ -62,6 +62,12 @@
         color: var(--muted);
       }
 
+      .controls {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
       button {
         font-family: monospace;
         font-size: 12px;
@@ -101,6 +107,10 @@
         color: #1fa21f;
       }
 
+      .exported-imported-text {
+        color: #0074d9;
+      }
+
       button:disabled {
         opacity: 0.5;
         cursor: not-allowed;
@@ -125,8 +135,21 @@
           rdr
         </a>
       </div>
+
       <div class="info" id="info">0 rules · Ctrl+S to save</div>
-      <button id="save">save</button>
+
+      <div class="controls">
+        <input
+          type="file"
+          id="file-input"
+          accept=".json"
+          style="display: none"
+        />
+
+        <button id="import">import</button>
+        <button id="export">export</button>
+        <button id="save">save</button>
+      </div>
     </header>
 
     <textarea id="rules" spellcheck="false"></textarea>
