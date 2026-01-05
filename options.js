@@ -5,9 +5,15 @@ const exportBtn = document.getElementById("export");
 const fileInput = document.getElementById("file-input");
 const info = document.getElementById("info");
 
+let lastSavedValue = "";
+
 async function load() {
   const data = await browser.storage.local.get("rules");
-  textarea.value = JSON.stringify(data.rules || [], null, 2);
+  const stringified = JSON.stringify(data.rules || [], null, 2);
+
+  textarea.value = stringified;
+  lastSavedValue = stringified;
+
   updateInfo();
 }
 
@@ -16,7 +22,12 @@ async function save() {
     const rules = JSON.parse(textarea.value);
     await browser.storage.local.set({ rules });
 
+    lastSavedValue = textarea.value;
+
+    updateInfo();
+
     info.innerHTML = `<span class="saved-text">saved!</span>`;
+
     setTimeout(updateInfo, 1000);
   } catch {
     alert("Invalid JSON");
@@ -29,8 +40,11 @@ function updateInfo() {
     const count = Array.isArray(rules) ? rules.length : 0;
     const isEmpty = count === 0;
 
+    const isDirty = textarea.value !== lastSavedValue;
+
     info.textContent = `${count} rules · Ctrl+S to save`;
     exportBtn.disabled = isEmpty;
+    saveBtn.disabled = !isDirty;
   } catch {
     info.innerHTML = `<span class="error-text">invalid JSON</span>`;
     saveBtn.disabled = true;
