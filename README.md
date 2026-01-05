@@ -24,6 +24,17 @@ Heavily inspired by [einaregilsson/Redirector](https://github.com/einaregilsson/
 > [!WARNING]
 > Made with ChatGPT 5.2 (Go Plan) and Google Gemini 3 Pro Preview (Free Plan)
 
+<p align="center">
+  <img
+    width="1244"
+    height="700"
+    alt="rdr - options page"
+    src="https://github.com/user-attachments/assets/d1480656-0936-49b1-a5dc-9bcb98a53f26"
+  />
+  <br />
+  <em>rdr — options page</em>
+</p>
+
 ## Usage
 
 In your toolbar or the addons list, Hit the "rdr" icon. This will open the options page.
