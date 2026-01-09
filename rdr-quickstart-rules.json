@@ -30,18 +30,18 @@
     "redirectUrl": "https://dumb.ducks.party/$2"
   },
   {
-    "description": "Stack Exchange subdomains → anonymousoverflow.catsarch.com (AnonymousOverflow)",
+    "description": "Stack Exchange subdomains → overflow.canine.tools (AnonymousOverflow)",
     "includePattern": "https?://([a-z0-9-]+)\\.stackexchange\\.com/(.*)",
-    "redirectUrl": "https://anonymousoverflow.catsarch.com/exchange/$1/$2"
+    "redirectUrl": "https://overflow.canine.tools/exchange/$1/$2"
   },
   {
-    "description": "Standalone Stack Exchange sites → anonymousoverflow.catsarch.com (AnonymousOverflow)",
+    "description": "Standalone Stack Exchange sites → overflow.canine.tools (AnonymousOverflow)",
     "includePattern": "https?://(superuser|askubuntu|serverfault)\\.com/(.*)",
-    "redirectUrl": "https://anonymousoverflow.catsarch.com/exchange/$1.com/$2"
+    "redirectUrl": "https://overflow.canine.tools/exchange/$1.com/$2"
   },
   {
-    "description": "Stack Overflow → anonymousoverflow.catsarch.com (AnonymousOverflow)",
+    "description": "Stack Overflow → overflow.canine.tools (AnonymousOverflow)",
     "includePattern": "https?://stackoverflow\\.com/(.*)",
-    "redirectUrl": "https://anonymousoverflow.catsarch.com/$1"
+    "redirectUrl": "https://overflow.canine.tools/$1"
   }
 ]
