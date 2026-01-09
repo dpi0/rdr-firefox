@@ -1,0 +1,47 @@
+[
+  {
+    "description": "Medium → scribe.rip (Scribe)",
+    "includePattern": "https?://(?:([a-z0-9-]+)\\.)?medium\\.com/(.*)",
+    "redirectUrl": "https://scribe.rip/$1/$2"
+  },
+  {
+    "description": "Imgur → rimgo.catsarch.com (Rimgo)",
+    "includePattern": "https?://(i\\.)?imgur\\.com/(.*)",
+    "redirectUrl": "https://rimgo.catsarch.com/$2"
+  },
+  {
+    "description": "Reddit → redlib.catsarch.com/ (Redlib)",
+    "includePattern": "https?://(www\\.|old\\.)?reddit\\.com/(.*)",
+    "redirectUrl": "https://redlib.catsarch.com//$2"
+  },
+  {
+    "description": "Tenor → soprano.catsarch.com (Soprano)",
+    "includePattern": "https?://(www\\.)?tenor\\.com/(.*)",
+    "redirectUrl": "https://soprano.catsarch.com/$2"
+  },
+  {
+    "description": "Twitter / X → xcancel.com (Nitter)",
+    "includePattern": "https?://(www\\.)?(twitter|x)\\.com/(.*)",
+    "redirectUrl": "https://xcancel.com/$3"
+  },
+  {
+    "description": "Genius → dumb.ducks.party (Dumb)",
+    "includePattern": "https?://(www\\.)?genius\\.com/(.*)",
+    "redirectUrl": "https://dumb.ducks.party/$2"
+  },
+  {
+    "description": "Stack Exchange subdomains → anonymousoverflow.catsarch.com (AnonymousOverflow)",
+    "includePattern": "https?://([a-z0-9-]+)\\.stackexchange\\.com/(.*)",
+    "redirectUrl": "https://anonymousoverflow.catsarch.com/exchange/$1/$2"
+  },
+  {
+    "description": "Standalone Stack Exchange sites → anonymousoverflow.catsarch.com (AnonymousOverflow)",
+    "includePattern": "https?://(superuser|askubuntu|serverfault)\\.com/(.*)",
+    "redirectUrl": "https://anonymousoverflow.catsarch.com/exchange/$1.com/$2"
+  },
+  {
+    "description": "Stack Overflow → anonymousoverflow.catsarch.com (AnonymousOverflow)",
+    "includePattern": "https?://stackoverflow\\.com/(.*)",
+    "redirectUrl": "https://anonymousoverflow.catsarch.com/$1"
+  }
+]
