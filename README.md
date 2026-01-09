@@ -30,7 +30,7 @@ Heavily inspired by [einaregilsson/Redirector](https://github.com/einaregilsson/
   />
   <br />
   <em>rdr — options page</em>
-</p> 
+</p>
 
 > [!WARNING]
 > Made with ChatGPT 5.2 (Go Plan) and Google Gemini 3 Pro Preview (Free Plan)
@@ -41,7 +41,7 @@ In your toolbar or the addons list, Hit the "rdr" icon. This will open the optio
 
 On the options page, paste or import (.json file) your rules for redirection.
 
-You can download the provided quickstart rules by [clicking here](https://github.com/dpi0/rdr-firefox/releases/download/v1.0.2/rdr-quickstart-rules.json) or by checking out the latest release.
+You can download the provided quickstart rules by [clicking here](https://github.com/dpi0/rdr-firefox/releases/latest/download/rdr-quickstart-rules.json) or by checking out the latest release.
 
 Make sure to hit **save** after you've imported your rules!
 
