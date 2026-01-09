@@ -21,33 +21,39 @@
 
 Heavily inspired by [einaregilsson/Redirector](https://github.com/einaregilsson/Redirector).
 
-> [!WARNING]
-> Made with ChatGPT 5.2 (Go Plan) and Google Gemini 3 Pro Preview (Free Plan)
-
 <p align="center">
   <img
     width="1244"
     height="700"
     alt="rdr - options page"
-    src="https://github.com/user-attachments/assets/d1480656-0936-49b1-a5dc-9bcb98a53f26"
+    src="https://github.com/user-attachments/assets/6009b33f-63bb-4af9-a146-389fe20e6728"
   />
   <br />
   <em>rdr — options page</em>
-</p>
+</p> 
 
-## Usage
+> [!WARNING]
+> Made with ChatGPT 5.2 (Go Plan) and Google Gemini 3 Pro Preview (Free Plan)
+
+## Quickstart
 
 In your toolbar or the addons list, Hit the "rdr" icon. This will open the options page.
 
 On the options page, paste or import (.json file) your rules for redirection.
 
+You can download the provided quickstart rules by [clicking here](https://github.com/dpi0/rdr-firefox/releases/download/v1.0.2/rdr-quickstart-rules.json) or by checking out the latest release.
+
+Make sure to hit **save** after you've imported your rules!
+
 You can also export your rules to a `.json` file to import later.
 
-Hit `Alt+Shift+O` (default keybind) to go back to the Original URL (xcancel --> Twitter).
+## Keybinds
 
-Hit `Alt+Shift+R` (default keybind) to the Re-directed URL (Twitter --> xcancel).
+Hit `Alt+Shift+O` (default) to go back to the Original URL (xcancel --> Twitter).
 
-Update the keybinds from `about:addons` by hitting the "Gear" icon and "Manage Extension Shortcuts".
+Hit `Alt+Shift+R` (default) to the Re-directed URL (Twitter --> xcancel).
+
+Update the default keybinds from `about:addons` by hitting the "Gear" icon and "Manage Extension Shortcuts".
 
 ## How Do the Rules Work?
 
