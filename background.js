@@ -24,6 +24,19 @@ browser.browserAction.onClicked.addListener(() => {
   browser.runtime.openOptionsPage();
 });
 
+browser.runtime.onInstalled.addListener(() => {
+  browser.contextMenus.create({
+    id: "go-original",
+    title: "Go to Original",
+    contexts: ["page"],
+  });
+  browser.contextMenus.create({
+    id: "go-redirected",
+    title: "Go to Redirection",
+    contexts: ["page"],
+  });
+});
+
 browser.webRequest.onBeforeRequest.addListener(
   (details) => {
     if (
@@ -52,7 +65,7 @@ browser.webRequest.onBeforeRequest.addListener(
   ["blocking"],
 );
 
-browser.commands.onCommand.addListener(async (command) => {
+async function handleCommand(command) {
   const [tab] = await browser.tabs.query({ active: true, currentWindow: true });
   if (!tab) return;
 
@@ -131,4 +144,10 @@ browser.commands.onCommand.addListener(async (command) => {
       browser.tabs.update(tab.id, { url: targetUrl });
     }
   }
+}
+
+browser.commands.onCommand.addListener(handleCommand);
+
+browser.contextMenus.onClicked.addListener((info) => {
+  handleCommand(info.menuItemId);
 });

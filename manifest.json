@@ -8,7 +8,8 @@
     "webRequestBlocking",
     "<all_urls>",
     "storage",
-    "tabs"
+    "tabs",
+    "contextMenus"
   ],
   "background": {
     "scripts": ["background.js"],
