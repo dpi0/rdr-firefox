@@ -28,12 +28,12 @@ browser.runtime.onInstalled.addListener(() => {
   browser.contextMenus.create({
     id: "go-original",
     title: "Go to Original",
-    contexts: ["page"],
+    contexts: ["page", "link"],
   });
   browser.contextMenus.create({
     id: "go-redirected",
     title: "Go to Redirection",
-    contexts: ["page"],
+    contexts: ["page", "link"],
   });
 });
 
@@ -65,18 +65,23 @@ browser.webRequest.onBeforeRequest.addListener(
   ["blocking"],
 );
 
-async function handleCommand(command) {
-  const [tab] = await browser.tabs.query({ active: true, currentWindow: true });
-  if (!tab) return;
+async function processUrl(command, currentUrl, tabId, openInNewTab = false) {
+  let state = tabMap.get(tabId);
 
-  let state = tabMap.get(tab.id);
+  if (
+    state &&
+    state.original !== currentUrl &&
+    state.redirected !== currentUrl
+  ) {
+    state = null;
+  }
 
   if (!state && command === "go-redirected") {
     for (const rule of compiledRules) {
-      if (rule.re.test(tab.url)) {
+      if (rule.re.test(currentUrl)) {
         state = {
-          original: tab.url,
-          redirected: tab.url.replace(rule.re, rule.redirectUrl),
+          original: currentUrl,
+          redirected: currentUrl.replace(rule.re, rule.redirectUrl),
         };
         break;
       }
@@ -87,7 +92,7 @@ async function handleCommand(command) {
     for (const rule of compiledRules) {
       try {
         const targetStr = rule.redirectUrl.split("$")[0];
-        if (!tab.url.startsWith(targetStr)) continue;
+        if (!currentUrl.startsWith(targetStr)) continue;
 
         const targetHost = new URL(targetStr).hostname;
         const sourceMatch = rule.re.source.match(
@@ -96,13 +101,13 @@ async function handleCommand(command) {
         if (!sourceMatch) continue;
 
         const sourceHost = sourceMatch[0].replace(/\\/g, "");
-        const candidate = tab.url.replace(targetHost, sourceHost);
+        const candidate = currentUrl.replace(targetHost, sourceHost);
 
         if (
           rule.re.test(candidate) &&
-          candidate.replace(rule.re, rule.redirectUrl) === tab.url
+          candidate.replace(rule.re, rule.redirectUrl) === currentUrl
         ) {
-          state = { original: candidate, redirected: tab.url };
+          state = { original: candidate, redirected: currentUrl };
           break;
         }
       } catch (e) {}
@@ -126,28 +131,50 @@ async function handleCommand(command) {
   const originalBase = origStr.slice(0, origStr.length - i);
   const redirectedBase = redStr.slice(0, redStr.length - i);
 
+  let targetUrl = null;
+
   if (command === "go-original") {
-    if (tab.url.startsWith(redirectedBase)) {
-      const newPath = tab.url.slice(redirectedBase.length);
-      const targetUrl = originalBase + newPath;
-      bypassUntil.set(tab.id, Date.now() + 3000);
-      browser.tabs.update(tab.id, { url: targetUrl });
-    } else {
+    if (currentUrl.startsWith(redirectedBase)) {
+      const newPath = currentUrl.slice(redirectedBase.length);
+      targetUrl = originalBase + newPath;
     }
   }
 
   if (command === "go-redirected") {
-    if (tab.url.startsWith(originalBase)) {
-      const newPath = tab.url.slice(originalBase.length);
-      const targetUrl = redirectedBase + newPath;
+    if (currentUrl.startsWith(originalBase)) {
+      const newPath = currentUrl.slice(originalBase.length);
+      targetUrl = redirectedBase + newPath;
+    }
+  }
 
-      browser.tabs.update(tab.id, { url: targetUrl });
+  if (targetUrl) {
+    if (openInNewTab) {
+      const newTab = await browser.tabs.create({
+        url: targetUrl,
+        active: true,
+      });
+      if (command === "go-original") {
+        bypassUntil.set(newTab.id, Date.now() + 3000);
+      }
+    } else {
+      if (command === "go-original") {
+        bypassUntil.set(tabId, Date.now() + 3000);
+      }
+      browser.tabs.update(tabId, { url: targetUrl });
     }
   }
 }
 
-browser.commands.onCommand.addListener(handleCommand);
+browser.commands.onCommand.addListener(async (command) => {
+  const [tab] = await browser.tabs.query({ active: true, currentWindow: true });
+  if (tab) {
+    processUrl(command, tab.url, tab.id, false);
+  }
+});
 
-browser.contextMenus.onClicked.addListener((info) => {
-  handleCommand(info.menuItemId);
+browser.contextMenus.onClicked.addListener((info, tab) => {
+  const isLink = !!info.linkUrl;
+  const urlToProcess = info.linkUrl || tab.url;
+
+  processUrl(info.menuItemId, urlToProcess, tab.id, isLink);
 });
