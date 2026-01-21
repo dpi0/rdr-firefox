@@ -37,6 +37,21 @@ async function save() {
 function updateInfo() {
   try {
     const rules = JSON.parse(textarea.value);
+
+    const allowed = ["description", "includePattern", "redirectUrl", "enabled"];
+    const hasInvalidKeys =
+      Array.isArray(rules) &&
+      rules.some((rule) =>
+        Object.keys(rule).some((key) => !allowed.includes(key)),
+      );
+
+    if (hasInvalidKeys) {
+      info.innerHTML = `<span class="error-text">invalid configuration // fix it</span>`;
+      saveBtn.disabled = true;
+      exportBtn.disabled = true;
+      return;
+    }
+
     const count = Array.isArray(rules) ? rules.length : 0;
     const isEmpty = count === 0;
 
