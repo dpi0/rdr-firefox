@@ -1,46 +1,46 @@
 [
   {
-    "description": "Medium → scribe.rip (Scribe)",
+    "description": "Medium → Scribe",
     "includePattern": "https?://(?:([a-z0-9-]+)\\.)?medium\\.com/(.*)",
     "redirectUrl": "https://scribe.rip/$1/$2"
   },
   {
-    "description": "Imgur → rimgo.catsarch.com (Rimgo)",
+    "description": "Imgur → Rimgo",
     "includePattern": "https?://(i\\.)?imgur\\.com/(.*)",
     "redirectUrl": "https://rimgo.catsarch.com/$2"
   },
   {
-    "description": "Reddit → redlib.catsarch.com/ (Redlib)",
+    "description": "Reddit → Redlib",
     "includePattern": "https?://(www\\.|old\\.)?reddit\\.com/(.*)",
-    "redirectUrl": "https://redlib.catsarch.com//$2"
+    "redirectUrl": "https://redlib.catsarch.com/$2"
   },
   {
-    "description": "Tenor → soprano.catsarch.com (Soprano)",
+    "description": "Tenor → Soprano",
     "includePattern": "https?://(www\\.)?tenor\\.com/(.*)",
     "redirectUrl": "https://soprano.catsarch.com/$2"
   },
   {
-    "description": "Twitter / X → xcancel.com (Nitter)",
+    "description": "Twitter / X → Nitter",
     "includePattern": "https?://(www\\.)?(twitter|x)\\.com/(.*)",
     "redirectUrl": "https://xcancel.com/$3"
   },
   {
-    "description": "Genius → dumb.ducks.party (Dumb)",
+    "description": "Genius → Dumb",
     "includePattern": "https?://(www\\.)?genius\\.com/(.*)",
     "redirectUrl": "https://dumb.ducks.party/$2"
   },
   {
-    "description": "Stack Exchange subdomains → overflow.canine.tools (AnonymousOverflow)",
+    "description": "Stack Exchange subdomains → AnonymousOverflow",
     "includePattern": "https?://([a-z0-9-]+)\\.stackexchange\\.com/(.*)",
     "redirectUrl": "https://overflow.canine.tools/exchange/$1/$2"
   },
   {
-    "description": "Standalone Stack Exchange sites → overflow.canine.tools (AnonymousOverflow)",
+    "description": "Standalone Stack Exchange sites → AnonymousOverflow",
     "includePattern": "https?://(superuser|askubuntu|serverfault)\\.com/(.*)",
     "redirectUrl": "https://overflow.canine.tools/exchange/$1.com/$2"
   },
   {
-    "description": "Stack Overflow → overflow.canine.tools (AnonymousOverflow)",
+    "description": "Stack Overflow → AnonymousOverflow",
     "includePattern": "https?://stackoverflow\\.com/(.*)",
     "redirectUrl": "https://overflow.canine.tools/$1"
   }
