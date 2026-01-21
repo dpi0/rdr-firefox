@@ -56,7 +56,34 @@ browser.commands.onCommand.addListener(async (command) => {
   const [tab] = await browser.tabs.query({ active: true, currentWindow: true });
   if (!tab) return;
 
-  const state = tabMap.get(tab.id);
+  let state = tabMap.get(tab.id);
+
+  if (!state && command === "go-original") {
+    for (const rule of compiledRules) {
+      try {
+        const targetStr = rule.redirectUrl.split("$")[0];
+        if (!tab.url.startsWith(targetStr)) continue;
+
+        const targetHost = new URL(targetStr).hostname;
+        const sourceMatch = rule.re.source.match(
+          /([a-zA-Z0-9-]+\\?\.)+[a-zA-Z0-9-]+/,
+        );
+        if (!sourceMatch) continue;
+
+        const sourceHost = sourceMatch[0].replace(/\\/g, "");
+        const candidate = tab.url.replace(targetHost, sourceHost);
+
+        if (
+          rule.re.test(candidate) &&
+          candidate.replace(rule.re, rule.redirectUrl) === tab.url
+        ) {
+          state = { original: candidate, redirected: tab.url };
+          break;
+        }
+      } catch (e) {}
+    }
+  }
+
   if (!state) return;
 
   const origStr = state.original;
