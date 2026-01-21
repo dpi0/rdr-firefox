@@ -52,12 +52,21 @@ function updateInfo() {
       return;
     }
 
-    const count = Array.isArray(rules) ? rules.length : 0;
-    const isEmpty = count === 0;
+    const total = Array.isArray(rules) ? rules.length : 0;
+    const disabledCount = Array.isArray(rules)
+      ? rules.filter((r) => r.enabled === false).length
+      : 0;
+    const activeCount = total - disabledCount;
 
+    const isEmpty = total === 0;
     const isDirty = textarea.value !== lastSavedValue;
 
-    info.textContent = `${count} rules · Ctrl+S to save`;
+    let statusText = `${activeCount} rules`;
+    if (disabledCount > 0) {
+      statusText += ` (${disabledCount} disabled)`;
+    }
+
+    info.textContent = `${statusText} · Ctrl+S to save`;
     exportBtn.disabled = isEmpty;
     saveBtn.disabled = !isDirty;
   } catch {
@@ -118,7 +127,6 @@ function getTimestampedFilename() {
   const d = pad(now.getDate());
   const mon = months[now.getMonth()];
   const y = String(now.getFullYear()).slice(-2);
-  // format: rdr-export-19-51-22-05-Dec-26.json
   return `rdr-export-${h}-${m}-${s}-${d}-${mon}-${y}.json`;
 }
 
