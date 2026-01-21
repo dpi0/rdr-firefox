@@ -55,6 +55,12 @@ Hit `Alt+Shift+R` (default) to the Re-directed URL (Twitter --> xcancel).
 
 Update the default keybinds from `about:addons` by hitting the "Gear" icon and "Manage Extension Shortcuts".
 
+## Context Menu
+
+Right-click on a page to either "Go to Original" or "Go to Redirection".
+
+Right-click on a URL to open that URL either redirected or original.
+
 ## How Do the Rules Work?
 
 Rules follow regex for URL Pattern detection and "Capture Groups" for Replacement.
@@ -63,12 +69,12 @@ These rules are basically a one-to-one copy of the ones used for [einaregilsson/
 
 They are matched from top to bottom so the first one that matches "wins" and the rest are ignored.
 
-An example rule to redirect "Twitter" to "xcancel"
+An example rule to redirect "Twitter" to "Nitter"
 
 ```json
 [
   {
-    "description": "Twitter / X → xcancel",
+    "description": "Twitter / X → Nitter",
     "includePattern": "https?://(www\\.)?(twitter|x)\\.com/(.*)",
     "redirectUrl": "https://xcancel.com/$3"
   }
@@ -97,7 +103,7 @@ Another example
 ```json
 [
   {
-    "description": "Medium → scribe.rip",
+    "description": "Medium → Scribe",
     "includePattern": "https?://(?:([a-z0-9-]+)\\.)?medium\\.com/(.*)",
     "redirectUrl": "https://scribe.rip/$1/$2"
   }
@@ -121,17 +127,17 @@ You can build any rule you want, below are some I created for myself.
     ```json
     [
       {
-        "description": "Stack Exchange subdomains → overflow.canine.tools",
+        "description": "Stack Exchange subdomains → AnonymousOverflow",
         "includePattern": "https?://([a-z0-9-]+)\\.stackexchange\\.com/(.*)",
         "redirectUrl": "https://overflow.canine.tools/exchange/$1/$2"
       },
       {
-        "description": "Standalone Stack Exchange sites → overflow.canine.tools",
+        "description": "Standalone Stack Exchange sites → AnonymousOverflow",
         "includePattern": "https?://(superuser|askubuntu|serverfault)\\.com/(.*)",
         "redirectUrl": "https://overflow.canine.tools/exchange/$1.com/$2"
       },
       {
-        "description": "Stack Overflow → overflow.canine.tools",
+        "description": "Stack Overflow → AnonymousOverflow",
         "includePattern": "https?://stackoverflow\\.com/(.*)",
         "redirectUrl": "https://overflow.canine.tools/$1"
       }
@@ -141,7 +147,7 @@ You can build any rule you want, below are some I created for myself.
     ```json
     [
       {
-        "description": "Genius → dumb.ducks.party",
+        "description": "Genius → Dumb",
         "includePattern": "https?://(www\\.)?genius\\.com/(.*)",
         "redirectUrl": "https://dumb.ducks.party/$2"
       }
@@ -151,7 +157,7 @@ You can build any rule you want, below are some I created for myself.
     ```json
     [
       {
-        "description": "Twitter / X → xcancel.com",
+        "description": "Twitter / X → Nitter",
         "includePattern": "https?://(www\\.)?(twitter|x)\\.com/(.*)",
         "redirectUrl": "https://xcancel.com/$3"
       }
@@ -161,7 +167,7 @@ You can build any rule you want, below are some I created for myself.
     ```json
     [
       {
-        "description": "Tenor → soprano.catsarch.com",
+        "description": "Tenor → Soprano",
         "includePattern": "https?://(www\\.)?tenor\\.com/(.*)",
         "redirectUrl": "https://soprano.catsarch.com/$2"
       }
@@ -171,7 +177,7 @@ You can build any rule you want, below are some I created for myself.
     ```json
     [
       {
-        "description": "Imgur → rimgo.catsarch.com",
+        "description": "Imgur → Rimgo",
         "includePattern": "https?://(i\\.)?imgur\\.com/(.*)",
         "redirectUrl": "https://rimgo.catsarch.com/$2"
       }
@@ -181,7 +187,7 @@ You can build any rule you want, below are some I created for myself.
     ```json
     [
       {
-        "description": "Reddit → redlib.catsarch.com",
+        "description": "Reddit → Redlib",
         "includePattern": "https?://(www\\.|old\\.)?reddit\\.com/(.*)",
         "redirectUrl": "https://redlib.catsarch.com/$2"
       }
@@ -191,7 +197,7 @@ You can build any rule you want, below are some I created for myself.
     ```json
     [
       {
-        "description": "Medium → scribe.rip",
+        "description": "Medium → Scribe",
         "includePattern": "https?://(?:([a-z0-9-]+)\\.)?medium\\.com/(.*)",
         "redirectUrl": "https://scribe.rip/$1/$2"
       }
