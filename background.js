@@ -58,6 +58,18 @@ browser.commands.onCommand.addListener(async (command) => {
 
   let state = tabMap.get(tab.id);
 
+  if (!state && command === "go-redirected") {
+    for (const rule of compiledRules) {
+      if (rule.re.test(tab.url)) {
+        state = {
+          original: tab.url,
+          redirected: tab.url.replace(rule.re, rule.redirectUrl),
+        };
+        break;
+      }
+    }
+  }
+
   if (!state && command === "go-original") {
     for (const rule of compiledRules) {
       try {
