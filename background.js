@@ -11,10 +11,12 @@ browser.tabs.onRemoved.addListener((tabId) => {
 async function loadRules() {
   const data = await browser.storage.local.get("rules");
   rules = Array.isArray(data.rules) ? data.rules : [];
-  compiledRules = rules.map((r) => ({
-    re: new RegExp(r.includePattern),
-    redirectUrl: r.redirectUrl,
-  }));
+  compiledRules = rules
+    .filter((r) => r.enabled !== false)
+    .map((r) => ({
+      re: new RegExp(r.includePattern),
+      redirectUrl: r.redirectUrl,
+    }));
 }
 
 loadRules();
